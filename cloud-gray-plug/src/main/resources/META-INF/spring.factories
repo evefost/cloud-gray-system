@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.xie.gray.config.GrayAutoConfiguration,\
+com.xie.gray.config.GrayTestAutoConfig

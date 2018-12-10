@@ -1,0 +1,9 @@
+请求路由过程
+DispatcherHandler
+寻找handlerMapping
+RoutePredicateHandlerMapping
+获取所有route 
+AbstractRoutePredicateFactory
+判定过滤出匹配的route
+AbstractGatewayFilterFactory
+对route过滤处理

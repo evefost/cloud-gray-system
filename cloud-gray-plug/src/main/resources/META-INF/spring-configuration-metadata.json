@@ -1,0 +1,24 @@
+{
+  "hints": [
+    {
+      "name": "gray.route.skip-paths",
+      "values": ["/gray/test/**"]
+    }
+
+  ],
+  "groups": [
+    {
+      "name": "灰度配置",
+      "type": "com.xhg.gray.config.GrayProperties",
+      "sourceType": "com.xhg.gray.config.GrayProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "gray.route.skip-paths",
+      "type": "java.util.HashSet",
+      "sourceType": "com.xie.gray.config.GrayProperties",
+      "description": "跳过接口的"
+    }
+  ]
+}
