@@ -58,14 +58,15 @@ public class InterceptorBeanProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName)
             throws BeansException {
+        //创建filter 的代理
         Object filterProxy = createFilterProxy(bean);
         if(bean.equals(filterProxy)){
+            //创建Interceptor 代理
            return createInterceptorProxy(bean);
         }else {
           return filterProxy;
         }
     }
-
 
     private Object createFilterProxy(Object bean){
         if(!filterClassExist()) {
@@ -97,6 +98,11 @@ public class InterceptorBeanProcessor implements BeanPostProcessor {
         }
         return bean;
     }
+
+    /**
+     * 如果不是servlet容器，filter 可能不存在
+     * @return
+     */
     private boolean filterClassExist() {
         if(filterClassExist){
             return true;

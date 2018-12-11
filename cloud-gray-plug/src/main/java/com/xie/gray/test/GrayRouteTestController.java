@@ -49,6 +49,10 @@ public class GrayRouteTestController {
     @Resource
     private RestTemplate restTemplate;
 
+    /**
+     * @param nodes  需要请求的顺序服务信息
+     * @return
+     */
     @RequestMapping(value = "linksTest", method = RequestMethod.POST)
     public TestResult nodeTest(@RequestBody List<String> nodes) {
         InstanceInfo startNodeServer = applicationInfoManager.getInfo();
@@ -56,6 +60,7 @@ public class GrayRouteTestController {
         if (!nodes.get(0).equals(currentServiceId)) {
             nodes.add(0,currentServiceId);
         }
+        //处理链路节点信息
         RequestNode requestNode = convert2RequestNode(nodes);
         List<ResultNode> resultNodes = internalNodeTest(requestNode);
         ResultNode startNode = new ResultNode();
@@ -82,6 +87,7 @@ public class GrayRouteTestController {
 
     @RequestMapping(value = "internalNodeTest", method = RequestMethod.POST)
     public List<ResultNode> internalNodeTest(@RequestBody RequestNode requestNode) {
+        //获取下一请求服务节点信息
         RequestNode next = requestNode.getNext();
         if (next == null) {
             logger.info("request is end");
@@ -95,6 +101,7 @@ public class GrayRouteTestController {
             nextNodeServer.setIndex(next.getIndex());
             nextNodeServer.setServiceId(next.getServiceId());
             List<ResultNode> resultNodes = new ArrayList<>();
+            //处理服务请求url
             String serverUrl = getServerUrl(next.getServiceId());
             if (StringUtils.isEmpty(serverUrl)) {
                 nextNodeServer.setMessage("无" + next.getServiceId() + "服务信息");
@@ -103,6 +110,7 @@ public class GrayRouteTestController {
                 return resultNodes;
             }
             HttpHeaders requestHeaders = new HttpHeaders();
+            //传递灰度标签
             requestHeaders.add(Constant.ROUTE_TO_GRAY, String.valueOf(GrayUtils.isGray()));
             HttpEntity<RequestNode> requestEntity = new HttpEntity<>(next, requestHeaders);
 
@@ -120,6 +128,7 @@ public class GrayRouteTestController {
                     nextNodeServer.setIndex(next.getIndex());
                 }
             } catch (Exception ex) {
+                //下一服务节点请求失败
                 logger.warn("links test failure:{}", ex.getMessage());
                 nextNodeServer.setMessage("[route_to_gray:" + GrayUtils.isGray() + "]" + ex.getMessage() + serverUrl);
                 nextNodeServer.setSuccess(false);
@@ -149,8 +158,7 @@ public class GrayRouteTestController {
     }
 
     /**
-     * http://server-c//serviceC/test/getGray
-     *
+     * 处理请求url
      * @param nextNodeId
      * @return
      */

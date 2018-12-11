@@ -19,4 +19,6 @@ public interface GrayRouteContext<V, E>  {
     E getExchange();
 
     void setExchange(E exchange);
+
+    String getRemoteAddr();
 }

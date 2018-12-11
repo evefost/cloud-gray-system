@@ -33,6 +33,4 @@ public class TokenStrategy extends GrayBaseStrategy implements GrayStrategy<Gate
         return StrategyType.TOKEN;
     }
 
-
-
 }

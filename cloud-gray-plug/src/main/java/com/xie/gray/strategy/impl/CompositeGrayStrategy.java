@@ -41,18 +41,13 @@ public class CompositeGrayStrategy extends GrayBaseStrategy implements IComposit
         return false;
     }
 
-
     @Override
     public StrategyType getType() {
         return COMPOSITE;
     }
 
-
-
     @Override
     public void add(GrayStrategy strategy) {
         grayStrategies.put(strategy.getType(), strategy);
     }
-
-
 }

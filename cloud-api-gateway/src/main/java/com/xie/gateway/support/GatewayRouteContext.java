@@ -3,6 +3,8 @@ package com.xie.gateway.support;
 import com.xie.gray.core.GrayRouteContext;
 import org.springframework.web.server.ServerWebExchange;
 
+import java.net.InetSocketAddress;
+
 import static com.xie.gray.core.Constant.SERVICE_ID;
 
 public class GatewayRouteContext   implements GrayRouteContext<Object,ServerWebExchange> {
@@ -40,5 +42,11 @@ public class GatewayRouteContext   implements GrayRouteContext<Object,ServerWebE
     @Override
     public void setExchange(ServerWebExchange exchange) {
         this.exchange = exchange;
+    }
+
+    @Override
+    public String getRemoteAddr() {
+        InetSocketAddress remoteAddress = exchange.getRequest().getRemoteAddress();
+        return  remoteAddress.getAddress().getHostAddress();
     }
 }

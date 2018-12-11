@@ -53,11 +53,13 @@ public  class InterceptorAdapter implements Callback {
      * @throws ServletException
      */
     protected Object doFilter(Object proxy, Method method, Object[] args) throws InvocationTargetException, IllegalAccessException, IOException, ServletException {
+        //是否为doFilter 方法
         if (FILTER_METHOD.equals(method.getName())) {
             HttpServletRequest servletRequest = (HttpServletRequest) args[0];
             ServletResponse servletResponse = (ServletResponse) args[1];
             FilterChain filterChain = (FilterChain) args[2];
             String servletPath = servletRequest.getServletPath();
+            //符合跳过规则，执行一个filter
             if (skipCurrentPath(servletPath)) {
                 logger.debug("[{}] is gray test path ,skip filter of {}",servletPath,target.getClass().getSimpleName());
                 filterChain.doFilter(servletRequest, servletResponse);
@@ -93,9 +95,11 @@ public  class InterceptorAdapter implements Callback {
      */
     protected Object preHandle(Object proxy, Method method, Object[] args)
             throws Exception {
+        //是否为preHandle 方法
         if (INTERCEPTOR_METHOD.equals(method.getName())) {
             HttpServletRequest servletRequest = (HttpServletRequest) args[0];
             String servletPath = servletRequest.getServletPath();
+            //符合跳过规则，不执当前代理逻辑
             if (skipCurrentPath(servletPath)) {
                 logger.debug("[{}] is gray test path ,skip interceptor of {}", servletPath, target.getClass().getSimpleName());
                 return true;

@@ -21,20 +21,12 @@ public class IpStrategy extends GrayBaseStrategy implements GrayStrategy<Gateway
 
     @Override
     public boolean isGray(GatewayRouteContext context) {
-        ServerWebExchange exchange = context.getExchange();
-        InetSocketAddress remoteAddress = exchange.getRequest().getRemoteAddress();
-        String ip = remoteAddress.getAddress().getHostAddress();
+        String ip = context.getRemoteAddr();
         return dao.exist(getServiceId()+ip);
     }
-
 
     @Override
     public StrategyType getType() {
         return StrategyType.IP;
     }
-
-
-
-
-
 }
