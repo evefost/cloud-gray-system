@@ -17,7 +17,7 @@ public abstract class BaseDao implements GrayDao<String> {
     }
 
     @Override
-    public  void add(String key) {
+    public void add(String key) {
         container.add(key);
     }
 
@@ -27,13 +27,12 @@ public abstract class BaseDao implements GrayDao<String> {
     }
 
     @Override
-    public void clear(String serviceId){
-        if(StringUtils.isEmpty(serviceId)){
+    public void clear(String serviceId) {
+        if (StringUtils.isEmpty(serviceId)) {
             container.clear();
-        }else {
-            Set<String> collect = container.stream().filter(key -> {
-                return !key.startsWith(serviceId);
-            }).collect(Collectors.toSet());
+        } else {
+            Set<String> collect = container.stream().filter((String key) -> !key.startsWith(serviceId))
+                .collect(Collectors.toSet());
             container = collect;
         }
     }

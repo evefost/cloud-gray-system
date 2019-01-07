@@ -29,10 +29,7 @@ StandardContextValve extends ValveBase
  invoke
  
  
-    public final void i
-StandardHostValve   
-    status(request, response);
-    custom
+ 
     
     ApplicationDispatcher
     
