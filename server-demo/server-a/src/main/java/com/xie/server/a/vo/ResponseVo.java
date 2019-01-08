@@ -1,4 +1,4 @@
-package com.xie.server.a;
+package com.xie.server.a.vo;
 
 public class ResponseVo<T> {
 

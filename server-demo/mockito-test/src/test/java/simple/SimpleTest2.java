@@ -1,19 +1,12 @@
 package simple;
 
-import org.junit.Assert;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.timeout;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import service.Server;
-
-import java.util.LinkedList;
-import java.util.List;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.*;
 
 /**
  * 创建mock对象不能对final，Anonymous ，primitive类进行mock。

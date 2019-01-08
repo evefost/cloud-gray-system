@@ -3,7 +3,6 @@ package com.xie.authorize.token.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.RequiredTypeException;
 import io.jsonwebtoken.impl.JwtMap;
-
 import java.util.Date;
 import java.util.Map;
 

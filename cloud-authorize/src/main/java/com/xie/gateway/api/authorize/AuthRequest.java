@@ -1,8 +1,8 @@
 package com.xie.gateway.api.authorize;
 
-import java.util.Map;
-
 import static com.sun.corba.se.impl.util.Version.PROJECT_NAME;
+
+import java.util.Map;
 
 public class AuthRequest extends AuthoMap {
 

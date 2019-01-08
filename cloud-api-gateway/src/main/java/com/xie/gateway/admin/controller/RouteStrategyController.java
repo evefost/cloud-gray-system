@@ -1,23 +1,22 @@
 package com.xie.gateway.admin.controller;
 
+import static java.util.stream.Collectors.toList;
+
 import com.xie.common.vo.ResponseVo;
 import com.xie.gateway.admin.bo.GrayIpBo;
 import com.xie.gateway.admin.bo.GrayTokenBo;
 import com.xie.gateway.admin.service.impl.GrayManagerService;
 import com.xie.gray.strategy.GrayStrategy;
 import com.xie.gray.strategy.StrategyContextFactory;
+import java.util.List;
+import javax.annotation.Resource;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.eureka.EurekaDiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-import javax.validation.Valid;
-import java.util.List;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author xie yang

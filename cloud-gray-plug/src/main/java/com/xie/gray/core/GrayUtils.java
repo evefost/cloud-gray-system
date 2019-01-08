@@ -1,11 +1,10 @@
 package com.xie.gray.core;
 
 import com.netflix.loadbalancer.Server;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author xie yang

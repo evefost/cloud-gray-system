@@ -1,8 +1,8 @@
 package com.xie.gateway.admin.bo;
 
 
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * <p> <p> </p>

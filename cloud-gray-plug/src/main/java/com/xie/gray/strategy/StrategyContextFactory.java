@@ -3,9 +3,12 @@ package com.xie.gray.strategy;
 
 import com.xie.gray.core.GrayRouteContext;
 import com.xie.gray.strategy.impl.CompositeGrayStrategy;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.springframework.cloud.context.named.NamedContextFactory;
-
-import java.util.*;
 
 /**
  * @author xie yang

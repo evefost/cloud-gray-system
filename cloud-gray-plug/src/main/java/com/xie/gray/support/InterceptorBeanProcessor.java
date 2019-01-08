@@ -1,19 +1,18 @@
 package com.xie.gray.support;
 
 import com.xie.gray.config.GrayProperties;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Parameter;
+import java.lang.reflect.Proxy;
+import java.util.HashMap;
+import java.util.Map;
+import javax.servlet.Filter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.web.servlet.HandlerInterceptor;
-
-import javax.servlet.Filter;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Parameter;
-import java.lang.reflect.Proxy;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 处理链测试接口跳过所有过滤器和拦截器
@@ -108,7 +107,7 @@ public class InterceptorBeanProcessor implements BeanPostProcessor {
             return true;
         }
         try {
-            Class clzz =  Filter.class;
+            Class.forName("javax.servlet.Filter");
             filterClassExist = true;
         }catch (Throwable e){
             filterClassExist = false;
@@ -121,7 +120,7 @@ public class InterceptorBeanProcessor implements BeanPostProcessor {
             return true;
         }
         try {
-            Class clzz =  HandlerInterceptor.class;
+            Class.forName("org.springframework.web.servlet.HandlerInterceptor");
             interceptorClassExist = true;
         }catch ( Throwable e){
             interceptorClassExist = false;

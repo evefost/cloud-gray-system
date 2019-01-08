@@ -10,12 +10,11 @@ import com.xie.gateway.api.authorize.RouteContext;
 import com.xie.gateway.api.event.AppChangeEvent;
 import com.xie.gateway.api.event.GateWayEvent;
 import com.xie.gateway.api.event.RefreshEvent;
+import java.util.Map;
+import javax.annotation.Resource;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-
-import javax.annotation.Resource;
-import java.util.Map;
 
 @Component
 public class DefaultResourceHandler implements ResourceHandler, ApplicationListener<GateWayEvent>, Refresh {

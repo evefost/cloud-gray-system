@@ -1,16 +1,15 @@
 package com.xie.authorize.token.jwt;
 
+import static com.xie.authorize.constant.Constants.TOKEN_CREATE_TIME;
+
 import com.alibaba.fastjson.JSONObject;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.CompressionCodecs;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
-
-import static com.xie.authorize.constant.Constants.TOKEN_CREATE_TIME;
 
 
 @Component

@@ -2,14 +2,13 @@ package com.xie.gray.feign;
 
 import com.netflix.client.config.IClientConfig;
 import com.netflix.loadbalancer.ILoadBalancer;
+import java.util.Map;
 import org.springframework.cloud.netflix.ribbon.ServerIntrospector;
 import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
 import org.springframework.cloud.openfeign.ribbon.CachingSpringLoadBalancerFactory;
 import org.springframework.cloud.openfeign.ribbon.ExtendFeignLoadBalancer;
 import org.springframework.cloud.openfeign.ribbon.FeignLoadBalancer;
 import org.springframework.util.ConcurrentReferenceHashMap;
-
-import java.util.Map;
 
 /**
  * @author xie yang

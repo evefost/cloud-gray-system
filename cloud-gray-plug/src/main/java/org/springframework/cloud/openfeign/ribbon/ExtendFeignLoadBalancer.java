@@ -8,12 +8,11 @@ import com.netflix.loadbalancer.ILoadBalancer;
 import com.netflix.loadbalancer.Server;
 import feign.Request;
 import feign.Response;
+import java.io.IOException;
+import java.net.URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.netflix.ribbon.ServerIntrospector;
-
-import java.io.IOException;
-import java.net.URI;
 
 public class ExtendFeignLoadBalancer extends FeignLoadBalancer {
 

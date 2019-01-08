@@ -1,5 +1,11 @@
 package com.xie.authorize.token.handler;
 
+import static com.xie.authorize.constant.Constants.ABORT_FIND_TOKEN;
+import static com.xie.authorize.constant.Constants.ROUT_CONTEXT_MESSAGE;
+import static com.xie.authorize.constant.Constants.TOKEN_CREATE_TIME;
+import static com.xie.authorize.constant.Constants.TOKEN_REFRESH_KEY;
+import static com.xie.authorize.constant.Constants.USER_SERVICE_ID;
+
 import com.xie.authorize.RoutContextHolder;
 import com.xie.authorize.ServiceMatcher;
 import com.xie.authorize.constant.Constants;
@@ -13,15 +19,12 @@ import com.xie.gateway.api.authorize.ContextMessage;
 import com.xie.gateway.api.authorize.RouteContext;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.PrematureJwtException;
+import java.util.StringTokenizer;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import java.util.StringTokenizer;
-
-import static com.xie.authorize.constant.Constants.*;
 
 /**
  * token处理器

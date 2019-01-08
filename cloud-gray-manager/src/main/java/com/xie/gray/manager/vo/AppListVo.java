@@ -1,7 +1,6 @@
 package com.xie.gray.manager.vo;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**

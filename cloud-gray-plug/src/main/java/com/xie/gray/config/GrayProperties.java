@@ -1,11 +1,10 @@
 package com.xie.gray.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.StringUtils;
-
-import javax.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Set;
+import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 
 
 public class GrayProperties {

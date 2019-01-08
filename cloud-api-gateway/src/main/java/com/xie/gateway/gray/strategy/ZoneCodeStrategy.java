@@ -1,5 +1,7 @@
 package com.xie.gateway.gray.strategy;
 
+import static com.xie.gateway.constant.Constants.ZONECODE;
+
 import com.xie.gateway.gray.bo.ZoneBo;
 import com.xie.gateway.gray.dao.ZoneCodeDao;
 import com.xie.gateway.support.GatewayRouteContext;
@@ -8,8 +10,6 @@ import com.xie.gray.strategy.GrayStrategy;
 import com.xie.gray.strategy.StrategyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-
-import static com.xie.gateway.constant.Constants.ZONECODE;
 
 /**
  * @author xie yang

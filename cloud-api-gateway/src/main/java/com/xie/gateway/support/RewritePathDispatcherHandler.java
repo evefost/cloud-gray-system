@@ -16,6 +16,14 @@
 
 package com.xie.gateway.support;
 
+import static com.xie.gray.core.Constant.ROUTE_CONTEXT;
+import static com.xie.gray.core.Constant.SERVICE_ID;
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.addOriginalRequestUrl;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.BeanFactoryUtils;
@@ -26,20 +34,15 @@ import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.lang.Nullable;
-import org.springframework.web.reactive.*;
+import org.springframework.web.reactive.DispatcherHandler;
+import org.springframework.web.reactive.HandlerAdapter;
+import org.springframework.web.reactive.HandlerMapping;
+import org.springframework.web.reactive.HandlerResult;
+import org.springframework.web.reactive.HandlerResultHandler;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import static com.xie.gray.core.Constant.ROUTE_CONTEXT;
-import static com.xie.gray.core.Constant.SERVICE_ID;
-import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.addOriginalRequestUrl;
 
 /**
  * 覆盖原DispatcherHandler 并据contextPath(requst path prefix) matcher service

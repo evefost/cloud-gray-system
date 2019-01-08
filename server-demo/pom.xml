@@ -16,6 +16,7 @@
         <module>server-b</module>
         <module>server-c</module>
         <module>mockito-test</module>
+      <module>code-generator</module>
     </modules>
 
 

@@ -1,8 +1,14 @@
 package com.xie.gray.config;
 
+import static com.xie.gray.core.Constant.CONTEXT_PATH;
+import static com.xie.gray.core.Constant.SUPPORT_GRAY;
+
 import com.netflix.appinfo.ApplicationInfoManager;
 import com.xie.gray.core.GrayLoadBalancerClient;
 import com.xie.gray.support.InterceptorBeanProcessor;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -21,13 +27,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
-
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.xie.gray.core.Constant.CONTEXT_PATH;
-import static com.xie.gray.core.Constant.SUPPORT_GRAY;
 
 /**
  * @author xie yang

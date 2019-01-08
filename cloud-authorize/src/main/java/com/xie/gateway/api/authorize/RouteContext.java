@@ -1,7 +1,7 @@
 package com.xie.gateway.api.authorize;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.InputStream;
+import javax.servlet.http.HttpServletRequest;
 
 public interface RouteContext<V> {
 

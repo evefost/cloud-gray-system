@@ -1,10 +1,10 @@
 package com.xie.authorize.token.jwt;
 
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.io.UnsupportedEncodingException;
+import javax.crypto.spec.SecretKeySpec;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-
-import javax.crypto.spec.SecretKeySpec;
 
 @Component
 @ConfigurationProperties("token")
@@ -47,9 +47,9 @@ public class TokenConfiguration {
         this.secretKey = secretKey;
     }
 
-    public SecretKeySpec getSecretKeySpec() {
+    public SecretKeySpec getSecretKeySpec() throws UnsupportedEncodingException {
         SecretKeySpec secretKeySpec = new SecretKeySpec(this.secretKey
-                .getBytes(), SignatureAlgorithm.HS512.getJcaName());
+                .getBytes("utf-8"), SignatureAlgorithm.HS512.getJcaName());
         return secretKeySpec;
     }
 

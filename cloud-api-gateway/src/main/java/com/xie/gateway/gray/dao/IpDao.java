@@ -1,9 +1,8 @@
 package com.xie.gateway.gray.dao;
 
 import com.xie.gray.strategy.BaseDao;
-import org.springframework.stereotype.Component;
-
 import java.util.HashSet;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by xieyang on 18/12/6.

@@ -1,6 +1,8 @@
 package com.xie.gateway.config;
 
 import com.xie.gateway.filter.GrayLoadBalancerClientFilter;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -20,9 +22,6 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.result.view.ViewResolver;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author xie yang

@@ -1,10 +1,14 @@
-package com.xie.server.a;
+package com.xie.server.a.web;
 
 
 import com.alibaba.fastjson.JSON;
+import com.xie.server.a.ServerCFeignService;
 import com.xie.server.a.bean.Test1;
 import com.xie.server.a.bean.Test2;
-import com.xie.server.a.bean.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import java.util.HashMap;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -14,14 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.validation.Valid;
-import java.util.HashMap;
-
 /**
  * Created by xieyang on 17/11/13.
  */
 
 @RestController
+@Api(value = "灰度操作", description = "灰度操作")
 public class GrayController {
 
     @Autowired(required = false)
@@ -30,6 +32,7 @@ public class GrayController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @ApiOperation(value = "添加用户")
     @RequestMapping(value = "simple", method = RequestMethod.GET)
     public String simple() {
         if (true) {

@@ -1,8 +1,11 @@
 package com.xie.gateway.api.authorize;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 import org.springframework.util.Assert;
-
-import java.util.*;
 
 public class AuthoMap implements Map<String, Object> {
 

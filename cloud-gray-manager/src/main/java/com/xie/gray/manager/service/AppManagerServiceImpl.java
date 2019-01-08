@@ -1,19 +1,18 @@
 package com.xie.gray.manager.service;
 
+import static java.util.stream.Collectors.toList;
+
 import com.xie.common.vo.Page;
 import com.xie.gray.manager.remote.EurekaFeignClient;
 import com.xie.gray.manager.vo.AppListVo;
 import com.xie.gray.manager.vo.AppListVo.ApplicationsBean.ApplicationBean;
+import java.util.List;
+import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-
-import java.util.List;
-import java.util.regex.Pattern;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author xie yang

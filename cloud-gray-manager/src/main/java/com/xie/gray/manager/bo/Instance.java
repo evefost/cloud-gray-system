@@ -1,9 +1,8 @@
 package com.xie.gray.manager.bo;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author xie yang

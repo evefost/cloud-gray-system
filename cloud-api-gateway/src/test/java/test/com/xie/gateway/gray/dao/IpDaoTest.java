@@ -1,11 +1,11 @@
 package test.com.xie.gateway.gray.dao;
 
+import static junit.framework.TestCase.assertEquals;
+
 import com.xie.gateway.gray.dao.IpDao;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static junit.framework.TestCase.assertEquals;
 
 /**
  * IpDao Tester.

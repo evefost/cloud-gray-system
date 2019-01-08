@@ -1,17 +1,16 @@
 package com.xie.gray.strategy.impl;
 
 
+import static com.xie.gray.strategy.StrategyType.COMPOSITE;
+
 import com.xie.gray.core.GrayRouteContext;
 import com.xie.gray.strategy.GrayBaseStrategy;
 import com.xie.gray.strategy.GrayStrategy;
 import com.xie.gray.strategy.ICompositeGray;
 import com.xie.gray.strategy.StrategyType;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.xie.gray.strategy.StrategyType.COMPOSITE;
 
 /**
  * 组合灰度路由策略

@@ -1,12 +1,16 @@
-package com.xie.server.a;
+package com.xie.server.a.filter;
 
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.*;
-import java.io.IOException;
 
 /**
  * 改写请求path，配置到不同环境服务
@@ -16,7 +20,7 @@ import java.io.IOException;
 @Order(1)
 public class RewritePathFilter implements Filter {
 
-    private static final Logger log = LoggerFactory.getLogger(RewritePathFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(RewritePathFilter.class);
 
 
 
@@ -35,7 +39,7 @@ public class RewritePathFilter implements Filter {
 //        if(true){
 //            throw new RuntimeException("filter 出错了");
 //        }
-        System.out.println("11111111111");
+        logger.info("11111111111");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

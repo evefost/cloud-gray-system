@@ -17,6 +17,12 @@
 
 package com.xie.gateway.factory;
 
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.URI_TEMPLATE_VARIABLES_ATTRIBUTE;
+import static org.springframework.http.server.PathContainer.parsePath;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.cloud.gateway.handler.predicate.AbstractRoutePredicateFactory;
@@ -28,13 +34,6 @@ import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.util.pattern.PathPattern;
 import org.springframework.web.util.pattern.PathPattern.PathMatchInfo;
 import org.springframework.web.util.pattern.PathPatternParser;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Predicate;
-
-import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.URI_TEMPLATE_VARIABLES_ATTRIBUTE;
-import static org.springframework.http.server.PathContainer.parsePath;
 
 /**
  * @author Spencer Gibb

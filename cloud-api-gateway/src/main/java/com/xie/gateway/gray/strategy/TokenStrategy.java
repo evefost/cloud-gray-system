@@ -1,5 +1,7 @@
 package com.xie.gateway.gray.strategy;
 
+import static com.xie.gateway.constant.Constants.TOKEN;
+
 import com.xie.gateway.gray.dao.TokenDao;
 import com.xie.gateway.support.GatewayRouteContext;
 import com.xie.gray.strategy.GrayBaseStrategy;
@@ -7,8 +9,6 @@ import com.xie.gray.strategy.GrayStrategy;
 import com.xie.gray.strategy.StrategyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-
-import static com.xie.gateway.constant.Constants.TOKEN;
 
 /**
  * @author xie yang

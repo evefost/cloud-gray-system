@@ -1,6 +1,9 @@
 package com.xie.gateway.filter;
 
 
+import static com.xie.gray.core.Constant.ROUTE_CONTEXT;
+import static com.xie.gray.core.Constant.ROUTE_TO_GRAY;
+
 import com.xie.gray.core.GrayRouteContext;
 import com.xie.gray.strategy.StrategyContextFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +14,6 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import static com.xie.gray.core.Constant.ROUTE_CONTEXT;
-import static com.xie.gray.core.Constant.ROUTE_TO_GRAY;
 
 /**
  * 添加灰度路由请求头信息

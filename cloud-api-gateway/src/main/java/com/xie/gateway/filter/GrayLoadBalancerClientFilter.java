@@ -17,8 +17,15 @@
 
 package com.xie.gateway.filter;
 
+import static com.xie.gray.core.Constant.ROUTE_TO_GRAY;
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR;
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_SCHEME_PREFIX_ATTR;
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.addOriginalRequestUrl;
+
 import com.xie.common.exception.XException;
 import com.xie.gray.core.GrayUtils;
+import java.net.URI;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.client.ServiceInstance;
@@ -28,12 +35,6 @@ import org.springframework.cloud.gateway.filter.LoadBalancerClientFilter;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.net.URI;
-import java.util.Map;
-
-import static com.xie.gray.core.Constant.ROUTE_TO_GRAY;
-import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.*;
 
 /**
  * @author Spencer Gibb

@@ -1,10 +1,18 @@
 package com.xie.gateway.config;
 
+import static org.springframework.cloud.gateway.filter.factory.RewritePathGatewayFilterFactory.REGEXP_KEY;
+import static org.springframework.cloud.gateway.filter.factory.RewritePathGatewayFilterFactory.REPLACEMENT_KEY;
+import static org.springframework.cloud.gateway.handler.predicate.RoutePredicateFactory.PATTERN_KEY;
+import static org.springframework.cloud.gateway.support.NameUtils.normalizeFilterFactoryName;
+import static org.springframework.cloud.gateway.support.NameUtils.normalizeRoutePredicateName;
+
 import com.xie.gateway.factory.MappingPathRoutePredicateFactory;
 import com.xie.gateway.factory.RewriteUrlGatewayFilterFactory;
 import com.xie.gateway.filter.GrayLoadBalancerClientFilter;
 import com.xie.gateway.support.RewritePathDispatcherHandler;
 import com.xie.gray.strategy.StrategyContextFactory;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration;
@@ -19,15 +27,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.web.reactive.DispatcherHandler;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.springframework.cloud.gateway.filter.factory.RewritePathGatewayFilterFactory.REGEXP_KEY;
-import static org.springframework.cloud.gateway.filter.factory.RewritePathGatewayFilterFactory.REPLACEMENT_KEY;
-import static org.springframework.cloud.gateway.handler.predicate.RoutePredicateFactory.PATTERN_KEY;
-import static org.springframework.cloud.gateway.support.NameUtils.normalizeFilterFactoryName;
-import static org.springframework.cloud.gateway.support.NameUtils.normalizeRoutePredicateName;
 
 /**
  * @author xie yang

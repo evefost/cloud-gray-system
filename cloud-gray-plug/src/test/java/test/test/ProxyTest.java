@@ -1,18 +1,17 @@
 package test.test;
 
 import com.netflix.eureka.EurekaServerContext;
-import org.springframework.cglib.proxy.Enhancer;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import org.springframework.cglib.proxy.Enhancer;
 
 public class ProxyTest {
     private static final Map<String,Object> baseTypes = new HashMap<>();

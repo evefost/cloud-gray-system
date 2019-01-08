@@ -2,11 +2,10 @@ package com.xie.gray.support;
 
 
 import com.xie.gray.config.GrayProperties;
+import java.lang.reflect.Method;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cglib.proxy.MethodProxy;
-
-import java.lang.reflect.Method;
 
 /**
  * Created by xieyang on 18/7/14.

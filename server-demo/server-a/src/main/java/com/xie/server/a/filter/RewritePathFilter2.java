@@ -1,10 +1,9 @@
-package com.xie.server.a;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+package com.xie.server.a.filter;
 
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 改写请求path，配置到不同环境服务

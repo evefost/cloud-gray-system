@@ -1,7 +1,13 @@
 package com.xie.gray.config;
 
 import com.netflix.client.config.IClientConfig;
-import com.netflix.loadbalancer.*;
+import com.netflix.loadbalancer.ILoadBalancer;
+import com.netflix.loadbalancer.IPing;
+import com.netflix.loadbalancer.IRule;
+import com.netflix.loadbalancer.Server;
+import com.netflix.loadbalancer.ServerList;
+import com.netflix.loadbalancer.ServerListFilter;
+import com.netflix.loadbalancer.ServerListUpdater;
 import com.xie.gray.core.GrayFeignInterceptor;
 import com.xie.gray.core.GrayLoadBalancer;
 import com.xie.gray.core.GrayRule;

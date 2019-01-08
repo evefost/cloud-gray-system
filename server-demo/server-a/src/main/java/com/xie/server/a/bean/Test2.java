@@ -1,9 +1,9 @@
 package com.xie.server.a.bean;
 
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 public class Test2 {
     @NotBlank
