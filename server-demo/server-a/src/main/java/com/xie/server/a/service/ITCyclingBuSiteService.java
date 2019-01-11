@@ -22,6 +22,8 @@ public interface ITCyclingBuSiteService extends IService<TCyclingBuSite> {
 
     List<CyclingBuSiteVo> queryList(SiteParams params);
 
+    List<CyclingBuSiteVo> queryListByLocation(SiteParams params);
+
     IPage<CyclingBuSiteVo> queryListByPage(SiteParams params);
 
     void addBatch(Collection<TCyclingBuSite> entityList);

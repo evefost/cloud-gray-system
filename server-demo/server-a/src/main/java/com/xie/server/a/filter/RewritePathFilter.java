@@ -10,13 +10,12 @@ import javax.servlet.ServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 /**
  * 改写请求path，配置到不同环境服务
  * @author xie
  */
-@Component
+//@Component
 @Order(1)
 public class RewritePathFilter implements Filter {
 

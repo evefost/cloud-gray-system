@@ -24,10 +24,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getLoginInterceptor())
-            .excludePathPatterns("/swagger-resources/**",
-            "/webjars/**", "/v2/**",
-            "/swagger-ui.html/**").addPathPatterns("/**");
+//        registry.addInterceptor(getLoginInterceptor())
+//            .excludePathPatterns("/swagger-resources/**",
+//            "/webjars/**", "/v2/**",
+//            "/swagger-ui.html/**").addPathPatterns("/**");
     }
 
     @Bean
