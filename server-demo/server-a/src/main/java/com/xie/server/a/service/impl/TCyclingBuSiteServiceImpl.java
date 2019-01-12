@@ -11,8 +11,11 @@ import com.xie.server.a.constant.SiteDistanceMapping;
 import com.xie.server.a.entity.TCyclingBuSite;
 import com.xie.server.a.mapper.TCyclingBuSiteMapper;
 import com.xie.server.a.service.ITCyclingBuSiteService;
+import com.xie.server.a.util.Circle;
 import com.xie.server.a.util.Geohash;
+import com.xie.server.a.util.Point;
 import com.xie.server.a.vo.CyclingBuSiteVo;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -43,7 +46,8 @@ public class TCyclingBuSiteServiceImpl extends ServiceImpl<TCyclingBuSiteMapper,
 
         double srcLon = Double.parseDouble(params.getLongitude());
         double srcLat = Double.parseDouble(params.getLatitude());
-        String extendGeoHash = getExtendGeoHash(srcLon, srcLat, params.getDistance());
+        //String extendGeoHash = getExtendGeoHash(srcLon, srcLat, params.getDistance());
+        String extendGeoHash = test2(srcLon, srcLat, params.getDistance());
         List<CyclingBuSiteVo> list = cyclingBuSiteMapper.queryListByGeoHash(extendGeoHash);
         List<CyclingBuSiteVo> collect = convertCyclingBuSiteVos(srcLon, srcLat,list);
         return collect;
@@ -51,24 +55,46 @@ public class TCyclingBuSiteServiceImpl extends ServiceImpl<TCyclingBuSiteMapper,
 
     private String getExtendGeoHash(double srcLon,double srcLat,long distance){
         SiteDistanceMapping transform = SiteDistanceMapping.transform(distance);
-        String srcCenter = geohash.encode(srcLon-distance/2 * Geohash.lonUnit,srcLat-distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
-        String srcCenter2 = geohash.encode(srcLon+distance/2 * Geohash.lonUnit,srcLat+distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
-        String srcCenter3 = geohash.encode(srcLon+distance/2 * Geohash.lonUnit,srcLat-distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
-        String srcCenter4 = geohash.encode(srcLon-distance/2 * Geohash.lonUnit,srcLat+distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
-        String srcLeftTop = geohash.encode( srcLon+distance/2 * Geohash.lonUnit,srcLat).substring(0, transform.getLevel());
-        String srcRightTop = geohash.encode( srcLon-distance/2 * Geohash.lonUnit,srcLat).substring(0, transform.getLevel());
-        String srcLeftBottom = geohash.encode(srcLon,srcLat+distance/2 * Geohash.latUnit ).substring(0, transform.getLevel());
-        String srcRightBottom = geohash.encode( srcLon,srcLat-distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
-        Set<String>  geohashes = new HashSet<>();
-        geohashes.add(srcCenter);
-        geohashes.add(srcCenter2);
-        geohashes.add(srcCenter3);
-        geohashes.add(srcCenter4);
+        String srcCenter = geohash.encode(srcLon,srcLat).substring(0, transform.getLevel());
 
-        geohashes.add(srcLeftTop);
-        geohashes.add(srcRightTop);
-        geohashes.add(srcLeftBottom);
-        geohashes.add(srcRightBottom);
+        String left = geohash.encode(srcLon-distance/2 * Geohash.lonUnit,srcLat).substring(0, transform.getLevel());
+        String leftTop = geohash.encode( srcLon-distance/2 * Geohash.lonUnit,srcLat+distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
+        String leftBottom = geohash.encode( srcLon-distance/2 * Geohash.lonUnit,srcLat-distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
+
+        String right = geohash.encode(srcLon+distance/2 * Geohash.lonUnit,srcLat).substring(0, transform.getLevel());
+        String rightTop = geohash.encode(srcLon+distance/2 * Geohash.lonUnit,srcLat+distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
+        String rightBottom = geohash.encode(srcLon+distance/2 * Geohash.lonUnit,srcLat-distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
+
+        String top = geohash.encode(srcLon,srcLat+distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
+        String bottom = geohash.encode(srcLon,srcLat-distance/2 * Geohash.latUnit).substring(0, transform.getLevel());
+
+
+        String lefTopInner = geohash.encode(srcLon-distance/4 * Geohash.lonUnit,srcLat+distance/4 * Geohash.latUnit).substring(0, transform.getLevel());
+        String rightTopInner = geohash.encode(srcLon+distance/4 * Geohash.lonUnit,srcLat+distance/4 * Geohash.latUnit).substring(0, transform.getLevel());
+        String lefBottomInner = geohash.encode(srcLon-distance/4 * Geohash.lonUnit,srcLat-distance/4 * Geohash.latUnit).substring(0, transform.getLevel());
+        String rightBottomInner = geohash.encode(srcLon+distance/4 * Geohash.lonUnit,srcLat-distance/4 * Geohash.latUnit).substring(0, transform.getLevel());
+
+        Set<String>  geohashes = new HashSet<>();
+
+        geohashes.add(srcCenter);
+
+        geohashes.add(left);
+        geohashes.add(leftTop);
+        geohashes.add(leftBottom);
+
+        geohashes.add(right);
+        geohashes.add(rightTop);
+        geohashes.add(rightBottom);
+
+        geohashes.add(top);
+        geohashes.add(bottom);
+
+        geohashes.add(lefTopInner);
+        geohashes.add(rightTopInner);
+        geohashes.add(lefBottomInner);
+        geohashes.add(rightBottomInner);
+
+
         StringBuilder sb = new StringBuilder();
         sb.append("(");
         for(String gh:geohashes){
@@ -77,6 +103,28 @@ public class TCyclingBuSiteServiceImpl extends ServiceImpl<TCyclingBuSiteMapper,
         String s1 = sb.toString();
         String result = s1.substring(0,s1.length()-3)+")";
         return result;
+    }
+
+    private String test2(double srcLon,double srcLat,long distance){
+        SiteDistanceMapping transform = SiteDistanceMapping.transform(distance);
+        Circle person = new Circle(srcLon,srcLat,distance*Geohash.lonUnit);
+        float unit = 360/6;
+        Set<String>  geohashes = new HashSet<>();
+        for(int i=0;i<6;i++){
+            float angle = unit*i;
+            Point point = person.computeCoordinates(angle);
+            String srcCenter = geohash.encode(point.getX(),point.getY()).substring(0, transform.getLevel());
+            geohashes.add(srcCenter);
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        for(String gh:geohashes){
+            sb.append(" geo_hash like '").append(gh).append("%' or");
+        }
+        String s1 = sb.toString();
+        String result = s1.substring(0,s1.length()-3)+")";
+        return result;
+
     }
 
     private String getExtendGeoHash2(double srcLon,double srcLat,long distance){
