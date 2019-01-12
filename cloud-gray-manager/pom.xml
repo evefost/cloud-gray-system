@@ -32,12 +32,6 @@
             <version>1.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <name>Team Nexus Repository</name>
-            <url>http://10.10.10.241:8088/nexus/content/groups/public/</url>
-        </repository>
-    </repositories>
+
 
 </project>

@@ -2,13 +2,16 @@ package com.xie.server.a.constant;
 
 public enum SiteDistanceMapping {
 
-    ONE_KM(1000,6),
-    FIVE_KM(5000,5),
-    TWENTY_KM(20000,4),
-    ONE_HUNDRED_FIFTY_KM(150000,3);
+    ONE_KM(1000,6,2),
+    FIVE_KM(5000,5,1.5),
+    TWENTY_KM(20000,4,1.25),
+    ONE_HUNDRED_FIFTY_KM(150000,3,1.1);
     private long distance;
 
     private int level;
+
+    private double scale;
+
 
     public long getDistance() {
         return distance;
@@ -26,12 +29,21 @@ public enum SiteDistanceMapping {
         this.level = level;
     }
 
-    private SiteDistanceMapping(int distance,int level){
+    private SiteDistanceMapping(int distance,int level,double scale){
         this.distance = distance;
         this.level = level;
+        this.scale = scale;
     }
 
-   public static SiteDistanceMapping transform(long distance){
+    public double getScale() {
+        return scale;
+    }
+
+    public void setScale(double scale) {
+        this.scale = scale;
+    }
+
+    public static SiteDistanceMapping transform(long distance){
       if(distance<=ONE_KM.getDistance()){
           return ONE_KM;
       }else if(distance<=FIVE_KM.getDistance()){

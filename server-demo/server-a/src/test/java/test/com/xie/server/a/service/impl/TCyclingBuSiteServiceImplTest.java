@@ -1,28 +1,22 @@
 package test.com.xie.server.a.service.impl;
 
 
-import static java.util.stream.Collectors.toList;
-
 import base.TestBaseService;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xie.server.a.bo.SiteParams;
 import com.xie.server.a.entity.TCyclingBuSite;
 import com.xie.server.a.service.ITCyclingBuSiteService;
-import com.xie.server.a.util.Circle;
 import com.xie.server.a.util.Geohash;
-import com.xie.server.a.util.Point;
 import com.xie.server.a.vo.CyclingBuSiteVo;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+
+import java.util.*;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * TCyclingBuSiteServiceImpl Tester.
@@ -37,15 +31,13 @@ public class TCyclingBuSiteServiceImplTest extends TestBaseService {
     private ITCyclingBuSiteService cyclingBuSiteService;
 
 
-
-
     @Test
     public void addGeohash() {
         IPage<TCyclingBuSite> page = new Page(0, 50);
         IPage<TCyclingBuSite> page1 = cyclingBuSiteService.page(page);
         long pages = page1.getPages();
         Random rd = new Random();
-        for (long p = 0; p < pages+1; p++) {
+        for (long p = 0; p < pages + 1; p++) {
             page.setCurrent(p);
             IPage<TCyclingBuSite> pageLIst = cyclingBuSiteService.page(page);
             List<TCyclingBuSite> records = page1.getRecords();
@@ -66,13 +58,15 @@ public class TCyclingBuSiteServiceImplTest extends TestBaseService {
                 int la = rd.nextInt(999999);
                 int loIndex = s.getLongitude().indexOf(".");
                 int laIndex = s.getLatitude().indexOf(".");
-                String lon = s.getLongitude().substring(0, loIndex+1) + String.valueOf(lo);
-                String lat = s.getLatitude().substring(0, laIndex+1) + String.valueOf(la);
+                String lon = s.getLongitude().substring(0, loIndex + 1) + String.valueOf(lo);
+                String lat = s.getLatitude().substring(0, laIndex + 1) + String.valueOf(la);
 
                 Geohash geohash = new Geohash();
+                String encode1 = geohash
+                        .encode(Double.parseDouble(lon), Double.parseDouble(lat));
                 String encode = geohash
-                    .encode(Double.parseDouble(lat), Double.parseDouble(lon));
-                s.setGeoHash(encode);
+                        .encode(Double.parseDouble(s.getLongitude()), Double.parseDouble(s.getLatitude()));
+                s.setGeoHash(encode1);
                 s.setDeviceId(UUID.randomUUID().toString());
                 s.setSiteCode(UUID.randomUUID().toString());
                 s.setId(null);
@@ -81,73 +75,52 @@ public class TCyclingBuSiteServiceImplTest extends TestBaseService {
             if (collect.isEmpty()) {
                 continue;
             }
-            cyclingBuSiteService.saveBatch(collect);
+            cyclingBuSiteService.saveOrUpdateBatch(collect);
         }
         System.out.println("修改条数:" + page1.getRecords());
     }
 
     Random rd = new Random();
+
     /**
      * Method: queryList(SiteParams params)
      */
     @Test
     public void testQueryList() throws Exception {
 
-        int total = 100;
+        int total = 10;
         int containCount = 0;
-        for(int i=0;i<total;i++){
+        for (int i = 0; i < total; i++) {
             int lo = rd.nextInt(9999);
             int la = rd.nextInt(9999);
-            String lon = "114.129014";
-            String lat = "22.809434";
-            lon = lon.substring(0, lon.length()-4) + String.valueOf(lo);
-            lat = lat.substring(0, lat.length()-4) + String.valueOf(la);
+            String lon = "113.738858";
+            String lat = "23.008921";
+//            lon = lon.substring(0, lon.length() - 4) + String.valueOf(lo);
+//            lat = lat.substring(0, lat.length() - 4) + String.valueOf(la);
             SiteParams params = new SiteParams();
             params.setDistance(5000);
             params.setLongitude(lon);
             params.setLatitude(lat);
             List<CyclingBuSiteVo> siteVos1 = cyclingBuSiteService.queryList(params);
             List<CyclingBuSiteVo> siteVos2 = cyclingBuSiteService.queryListByLocation(params);
-            if(contain(siteVos1,siteVos2)){
+            if (contain(siteVos1, siteVos2)) {
                 containCount++;
             }
         }
 
-        System.out.println("total:"+total+"/"+containCount);
-    }
-
-    @Test
-    public void testPont(){
-        int lo = rd.nextInt(9999);
-        int la = rd.nextInt(9999);
-        String lon = "114.129014";
-        String lat = "22.809434";
-        lon = lon.substring(0, lon.length()-4) + String.valueOf(lo);
-        lat = lat.substring(0, lat.length()-4) + String.valueOf(la);
-        double x = Double.parseDouble(lon);
-        double y = Double.parseDouble(lat);
-        Circle person = new Circle(x,y,5000*Geohash.lonUnit);
-        float unit = 360/6;
-        List<Point> points = new ArrayList<>();
-        for(int i=0;i<6;i++){
-            float angle = unit*i;
-            Point point = person.computeCoordinates(angle);
-            points.add(point);
-        }
-
-        System.out.println(points);
+        Assert.assertTrue(total == containCount);
 
     }
 
 
-    boolean contain( List<CyclingBuSiteVo> siteVos1, List<CyclingBuSiteVo> siteVos2){
-        Map<String,CyclingBuSiteVo> geohashMap = new HashMap<>();
-        for(CyclingBuSiteVo bs:siteVos1){
-            geohashMap.put(bs.getGeoHash(),bs);
+    private boolean contain(List<CyclingBuSiteVo> siteVos1, List<CyclingBuSiteVo> siteVos2) {
+        Map<String, CyclingBuSiteVo> geohashMap = new HashMap<>();
+        for (CyclingBuSiteVo bs : siteVos1) {
+            geohashMap.put(bs.getGeoHash(), bs);
         }
-        for(CyclingBuSiteVo bs:siteVos2){
+        for (CyclingBuSiteVo bs : siteVos2) {
             CyclingBuSiteVo siteVo = geohashMap.get(bs.getGeoHash());
-            if(siteVo == null){
+            if (siteVo == null) {
                 return false;
             }
         }

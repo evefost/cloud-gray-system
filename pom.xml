@@ -72,11 +72,7 @@
                 <version>3.1.0</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>com.xhg</groupId>
-                <artifactId>xhg-authorization</artifactId>
-                <version>1.0.0.1-SNAPSHOT</version>
-            </dependency>
+
 
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -91,18 +87,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>Snapshots</name>
-            <url>http://10.10.10.241:8088/nexus/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>releases</id>
-            <name>Releases</name>
-            <url>http://10.10.10.241:8088/nexus/content/repositories/releases/</url>
-        </repository>
-    </distributionManagement>
+
 
     <build>
         <plugins>

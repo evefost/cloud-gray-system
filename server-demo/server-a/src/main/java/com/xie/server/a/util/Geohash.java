@@ -156,77 +156,11 @@ public class Geohash {
         return s;
     }
 
-    public static String BASE32 = "0123456789bcdefghjkmnpqrstuvwxyz";
-
-    public static String[] getGeoHashExpand(String geohash) {
-        try {
-            String geohashTop = calculateAdjacent(geohash, TOP);
-            String geohashBottom = calculateAdjacent(geohash, BOTTOM);
-            String geohashRight = calculateAdjacent(geohash, RIGHT);
-            String geohashLeft = calculateAdjacent(geohash, LEFT);
-
-            String geohashTopLeft = calculateAdjacent(geohashLeft, TOP);
-            String geohashTopRight = calculateAdjacent(geohashRight, TOP);
-            String geohashBottomRight = calculateAdjacent(geohashRight, BOTTOM);
-            String geohashBottomLeft = calculateAdjacent(geohashLeft, BOTTOM);
-
-            String[] expand = { geohash, geohashTop, geohashBottom, geohashRight, geohashLeft, geohashTopLeft,
-                geohashTopRight, geohashBottomRight, geohashBottomLeft };
-            return expand;
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public static String calculateAdjacent(String srcHash, int dir) {
-        srcHash = srcHash.toLowerCase();
-        char lastChr = srcHash.charAt(srcHash.length() - 1);
-        int type = (srcHash.length() % 2) == 1 ? ODD : EVEN;
-        String base = srcHash.substring(0, srcHash.length() - 1);
-        if (BORDERS[dir][type].indexOf(lastChr) != -1) {
-            base = calculateAdjacent(base, dir);
-        }
-        return base + BASE32.charAt(NEIGHBORS[dir][type].indexOf(lastChr));
-    }
 
 
 
 
-    public static int RIGHT = 0;
-    public static int LEFT = 1;
-    public static int TOP = 2;
-    public static int BOTTOM = 3;
 
-    public static int EVEN = 0;
-    public static int ODD = 1;
-
-    public static String[][] NEIGHBORS;
-    public static String[][] BORDERS;
-
-    static {
-        NEIGHBORS = new String[4][2];
-        BORDERS = new String[4][2];
-
-        NEIGHBORS[BOTTOM][EVEN] = "bc01fg45238967deuvhjyznpkmstqrwx";
-        NEIGHBORS[TOP][EVEN] = "238967debc01fg45kmstqrwxuvhjyznp";
-        NEIGHBORS[LEFT][EVEN] = "p0r21436x8zb9dcf5h7kjnmqesgutwvy";
-        NEIGHBORS[RIGHT][EVEN] = "14365h7k9dcfesgujnmqp0r2twvyx8zb";
-
-        BORDERS[BOTTOM][EVEN] = "bcfguvyz";
-        BORDERS[TOP][EVEN] = "0145hjnp";
-        BORDERS[LEFT][EVEN] = "prxz";
-        BORDERS[RIGHT][EVEN] = "028b";
-
-        NEIGHBORS[BOTTOM][ODD] = NEIGHBORS[LEFT][EVEN];
-        NEIGHBORS[TOP][ODD] = NEIGHBORS[RIGHT][EVEN];
-        NEIGHBORS[LEFT][ODD] = NEIGHBORS[BOTTOM][EVEN];
-        NEIGHBORS[RIGHT][ODD] = NEIGHBORS[TOP][EVEN];
-
-        BORDERS[BOTTOM][ODD] = BORDERS[LEFT][EVEN];
-        BORDERS[TOP][ODD] = BORDERS[RIGHT][EVEN];
-        BORDERS[LEFT][ODD] = BORDERS[BOTTOM][EVEN];
-        BORDERS[RIGHT][ODD] = BORDERS[TOP][EVEN];
-    }
 
 
 
