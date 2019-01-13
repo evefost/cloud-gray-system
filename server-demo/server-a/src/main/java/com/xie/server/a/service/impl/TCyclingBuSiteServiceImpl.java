@@ -53,8 +53,23 @@ public class TCyclingBuSiteServiceImpl extends ServiceImpl<TCyclingBuSiteMapper,
     public String  getGeoHashes(double longitude,double latitude, int radius) {
 
         SiteDistanceMapping transform = SiteDistanceMapping.transform(radius);
-        radius = (int) (radius*transform.getScale());
-        transform = SiteDistanceMapping.transform(radius);
+        String srcCenter = geohash.encode(longitude,latitude).substring(0, transform.getLevel());
+        Set<String> geohashes = getCircleGeohashes(longitude, latitude, (int) (radius*transform.getScale()));
+
+        geohashes.add(srcCenter);
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        for(String gh:geohashes){
+            sb.append(" geo_hash like '").append(gh).append("%' or");
+        }
+        String s1 = sb.toString();
+        String result = s1.substring(0,s1.length()-3)+")";
+        return result;
+
+    }
+
+    private Set<String> getCircleGeohashes(double longitude,double latitude, int radius){
+        SiteDistanceMapping transform = SiteDistanceMapping.transform(radius);
         double r = 6371000.79;
         int numpoints = 360;
         double phase = 2 * Math.PI / numpoints;
@@ -74,17 +89,8 @@ public class TCyclingBuSiteServiceImpl extends ServiceImpl<TCyclingBuSiteMapper,
             String geoHash = geohash.encode(newlng,newLat).substring(0, transform.getLevel());
             geohashes.add(geoHash);
         }
-        String srcCenter = geohash.encode(longitude,latitude).substring(0, transform.getLevel());
-        geohashes.add(srcCenter);
-        StringBuilder sb = new StringBuilder();
-        sb.append("(");
-        for(String gh:geohashes){
-            sb.append(" geo_hash like '").append(gh).append("%' or");
-        }
-        String s1 = sb.toString();
-        String result = s1.substring(0,s1.length()-3)+")";
-        return result;
 
+        return geohashes;
     }
 
 
